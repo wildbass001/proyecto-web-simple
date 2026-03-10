@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Puro - Ejercicio</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            transition: all 0.3s ease;
+        }
+        input, button { padding: 12px; margin: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; }
+        button { cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="cajaTexto" placeholder="Escribe algo y presiona Enter">
+    <button id="btnColor">Cambiar Colores</button>
+
+    <script>
+        const input = document.getElementById('cajaTexto');
+        const btn = document.getElementById('btnColor');
+        const body = document.body;
+
+        // 1. Evento Enter
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                alert("Texto ingresado: " + input.value);
+            }
+        });
+
+        // 2. Lógica de colores (Máquina de estados)
+        let estado = 0;
+        const temas = [
+            { bg: "white", text: "black" },
+            { bg: "black", text: "white" },
+            { bg: "skyblue", text: "red" }
+        ];
+
+        btn.addEventListener('click', () => {
+            estado = (estado + 1) % temas.length;
+            body.style.backgroundColor = temas[estado].bg;
+            body.style.color = temas[estado].text;
+        });
+    </script>
+</body>
+</html>
